@@ -6,7 +6,7 @@ export class UserService {
   /**
    * Obtener usuario por ID
    */
-  async getById(userId: string) {
+  async getById(userId: number) {
     if (!userId) {
       throw new Error("ID de usuario inválido");
     }
@@ -30,14 +30,24 @@ export class UserService {
   /**
    * Actualizar perfil
    */
-  async update(
-    userId: string,
-    data: { name?: string }
+  async updateUser(
+    userId: number,
+    name: string
   ) {
-    if (!data.name) {
+    if (!name) {
       throw new Error("El nombre es obligatorio");
     }
 
-    return await this.userRepo.updateUser(userId, data);
+    return await this.userRepo.updateUser(userId, name);
   }
+
+
+  async getAllUsers(role: string) {
+  if (role !== "admin") {
+    throw new Error("Acceso denegado: solo admin puede listar usuarios");
+  }
+  const users = await this.userRepo.findAllUsers();
+  return users;
 }
+}
+
