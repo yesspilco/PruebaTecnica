@@ -94,7 +94,7 @@ export const getUserIdController = async (req: Request, res: Response) => {
       return res.status(401).json({ message: "No autorizado" });
     }
 
-    const userId = req.user.userId;
+    const userId = req.user.id;
     const user = await userRepo.findById(userId);
 
     if (!user) {
@@ -119,7 +119,7 @@ export const updateUserController = async (req: Request, res: Response) => {
   try {
     if (!req.user) return res.status(401).json({ message: "No autorizado" });
     const { name } = req.body;
-    const user = await userService.updateUser(req.user.userId, name);
+    const user = await userService.updateUser(req.user.id, name);
     res.status(200).json({ message: "Perfil actualizado", user });
   } catch (error: any) {
     res.status(400).json({ message: error.message });

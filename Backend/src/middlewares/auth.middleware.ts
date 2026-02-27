@@ -13,7 +13,6 @@ export const authMiddleware = (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization;
-
   if (!authHeader) {
     return res.status(401).json({
       message: "Token no proporcionado",
@@ -42,7 +41,6 @@ export const authMiddleware = (
       email: decoded.email,
       role: decoded.role,
     };
-
     next();
   } catch (error) {
     console.error("ERROR JWT:", error);
