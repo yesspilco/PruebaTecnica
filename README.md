@@ -76,7 +76,7 @@ Registro de usuario
     }
 ```
 - Respuesta exitosa
-```   {
+```json  {
       "message": "Usuario registrado correctamente",
       "user": {
         "id": 2,
@@ -96,7 +96,7 @@ Obtener perfil del usuario logueado
 - Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoianVuaW9yQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzcyMjE0NjM3LCJleHAiOjE3NzIyMTgyMzd9.ZaRZhq15fuPveQWwUqqMTQV0x9oQiELvz7j4sLKqZD4
 
 - Respuesta Exitosa
-``` {
+```json {
       "id": 2,
       "name": "Usuario de prueba",
       "email": "userprueba@test.com",
@@ -116,7 +116,7 @@ Actualizar perfil del usuario
     }
 ```
 - Respuesta exitosa
-```  {
+```json {
       "message": "Perfil actualizado correctamente",
       "user": {
         "id": 2,
@@ -134,7 +134,7 @@ Listar todos los usuarios (solo admin)
 - Headers:
 - Authorization: Bearer <token_admin>
 - Respuesta exitosa
-```    [
+```json    [
      {
        "id": 1,
        "name": "Admin",
