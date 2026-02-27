@@ -7,28 +7,48 @@ interface JwtPayload {
   role: string;
 }
 
-// Extender Request para que TypeScript sepa de req.user
-declare global {
-  namespace Express {
-    interface Request {
-      user?: JwtPayload;
-    }
-  }
-}
-
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "No autorizado" });
+
+  if (!authHeader) {
+    return res.status(401).json({
+      message: "Token no proporcionado",
+    });
   }
 
-  const token = authHeader.split(" ")[1];
+  const parts = authHeader.split(" ");
+
+  if (parts.length !== 2 || parts[0] !== "Bearer") {
+    return res.status(401).json({
+      message: "Formato de token inválido",
+    });
+  }
+
+  const token = parts[1];
 
   try {
-    const payload = jwt.verify(token, process.env.JWT_SECRET || "secret") as JwtPayload;
-    req.user = payload; // Guardamos datos del token en req.user
+    const decoded = jwt.verify(
+      token,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
+
+    // 👇 AQUÍ se inyecta el usuario al request
+    req.user = {
+      id: decoded.userId,
+      email: decoded.email,
+      role: decoded.role,
+    };
+
     next();
   } catch (error) {
-    return res.status(401).json({ message: "Token inválido" });
+    console.error("ERROR JWT:", error);
+
+    return res.status(401).json({
+      message: "Token inválido o expirado",
+    });
   }
 };
