@@ -1,72 +1,66 @@
-import { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "../App.css";
 
 const UserProfile = () => {
-  const { user, updateProfile } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
-
+  const [editing, setEditing] = useState(false);
   const [name, setName] = useState(user?.name || "");
   const [email, setEmail] = useState(user?.email || "");
-  const [message, setMessage] = useState("");
 
-  useEffect(() => {
-    // Actualiza los campos cuando cambia el user
-    if (user) {
-      setName(user.name);
-      setEmail(user.email);
-    }
-  }, [user]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      await updateProfile({ name, email });
-      setMessage("Datos actualizados correctamente");
-    } catch (err) {
-      setMessage("Error al actualizar datos");
-    }
+  const handleLogout = () => {
+    logout();
+    navigate("/");
   };
+
+  const handleEdit = () => {
+    setEditing(true);
+  };
+
+  const handleSave = () => {
+    // Aquí va la lógica para actualizar perfil
+    setEditing(false);
+    alert("Datos actualizados correctamente!");
+  };
+
+  if (!user) return <p>Cargando...</p>;
 
   return (
     <div className="profile-container">
-      <div className="profile-card">
-        <h2 className="profile-title">Mi Perfil</h2>
 
-        {message && <p className="profile-message">{message}</p>}
+      <div className="profile-form">
+        <label>Nombre:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          disabled={!editing}
+        />
 
-        <form className="profile-form" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Nombre"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="profile-input"
-            required
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="profile-input"
-            required
-          />
-          <button type="submit" className="profile-button">
-            Actualizar Perfil
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          disabled={!editing}
+        />
+
+        {!editing ? (
+          <button className="btn" onClick={handleEdit}>
+            Editar
           </button>
-        </form>
-
-        {/* Botón solo para admin */}
-        {user?.role === "admin" && (
-          <button
-            className="profile-admin-button"
-            onClick={() => navigate("/admin/users")}
-          >
-            Listar Usuarios
+        ) : (
+          <button className="btn" onClick={handleSave}>
+            Guardar
           </button>
         )}
+
+        {/* Botón de cerrar sesión */}
+        <button className="btn btn-logout" onClick={handleLogout}>
+          Cerrar sesión
+        </button>
       </div>
     </div>
   );

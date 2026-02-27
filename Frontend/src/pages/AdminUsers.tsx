@@ -19,6 +19,13 @@ const AdminUsers = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const usersPerPage = 5;
+
+  // Filtro de búsqueda
+  const [search, setSearch] = useState("");
+
   useEffect(() => {
     if (!user || user.role !== "admin") {
       navigate("/");
@@ -43,6 +50,24 @@ const AdminUsers = () => {
   if (loading) return <p>Cargando usuarios...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  // Filtrar usuarios por búsqueda
+  const filteredUsers = users.filter(
+    (u) =>
+      u.name.toLowerCase().includes(search.toLowerCase()) ||
+      u.email.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Paginación sobre usuarios filtrados
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+
+  const handlePageChange = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
+
   return (
     <div className="admin-container">
       <div className="admin-card">
@@ -66,6 +91,24 @@ const AdminUsers = () => {
           </button>
         </div>
 
+        {/* Filtro de búsqueda */}
+        <input
+          type="text"
+          placeholder="Buscar por nombre o email"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setCurrentPage(1); // Reinicia a la página 1 al filtrar
+          }}
+          style={{
+            padding: "8px",
+            width: "100%",
+            marginBottom: "15px",
+            borderRadius: "4px",
+            border: "1px solid #ccc",
+          }}
+        />
+
         <table className="admin-table">
           <thead>
             <tr>
@@ -76,7 +119,7 @@ const AdminUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {(users || []).map((u) => (
+            {currentUsers.map((u) => (
               <tr key={u.id}>
                 <td>{u.id}</td>
                 <td>{u.name}</td>
@@ -86,6 +129,36 @@ const AdminUsers = () => {
             ))}
           </tbody>
         </table>
+
+        {/* Paginación */}
+        <div style={{ marginTop: "15px", textAlign: "center" }}>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            style={{ marginRight: "5px" }}
+          >
+            Anterior
+          </button>
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i + 1}
+              onClick={() => handlePageChange(i + 1)}
+              style={{
+                margin: "0 3px",
+                fontWeight: currentPage === i + 1 ? "bold" : "normal",
+              }}
+            >
+              {i + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            style={{ marginLeft: "5px" }}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
     </div>
   );
