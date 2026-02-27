@@ -47,41 +47,42 @@ Login
 - Ruta: /api/auth/login
 - Descripción: Inicia sesión y devuelve token JWT y datos del usuario.
 - Body (JSON):
--    {
+```json
+    {
       "email": "adminprueba@test.com",
       "password": "12345678"
--    }
+   }
 - respuesta exitosa
--    {
--      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
--      "user": {
--        "id": 1,
--        "name": "Admin",
--        "email": "adminprueba@test.com",
--        "role": "admin"
--      }
--    }
+```{
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+      "user": {
+        "id": 1,
+        "name": "Admin",
+        "email": "adminprueba@test.com",
+        "role": "admin"
+      }
+    }
 
 Registro de usuario
 - Método: POST
 - Ruta: /api/auth/register
 - Descripción: Registra un nuevo usuario.
 - Body (JSON):
--    {
--     "name": "Usuario de prueba",
--      "email": "userprueba@test.com",
--      "password": "12345678"
--    }
+```json {
+     "name": "Usuario de prueba",
+      "email": "userprueba@test.com",
+      "password": "12345678"
+    }
 - Respuesta exitosa
--    {
--      "message": "Usuario registrado correctamente",
--      "user": {
--        "id": 2,
--        "name": "Usuario de prueba",
--        "email": "userprueba@test.com",
--        "role": "user"
--      }
--    }
+```   {
+      "message": "Usuario registrado correctamente",
+      "user": {
+        "id": 2,
+        "name": "Usuario de prueba",
+        "email": "userprueba@test.com",
+        "role": "user"
+      }
+    }
 
 Obtener perfil del usuario logueado
 - Método: GET
@@ -92,12 +93,12 @@ Obtener perfil del usuario logueado
 - Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImVtYWlsIjoianVuaW9yQGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzcyMjE0NjM3LCJleHAiOjE3NzIyMTgyMzd9.ZaRZhq15fuPveQWwUqqMTQV0x9oQiELvz7j4sLKqZD4
 
 - Respuesta Exitosa
--    {
--      "id": 2,
--      "name": "Usuario de prueba",
--      "email": "userprueba@test.com",
--      "role": "user"
--    }
+``` {
+      "id": 2,
+      "name": "Usuario de prueba",
+      "email": "userprueba@test.com",
+      "role": "user"
+    }
 
 Actualizar perfil del usuario
 - Método: PUT
@@ -105,20 +106,20 @@ Actualizar perfil del usuario
 - Descripción: Actualiza el nombre y/o email del usuario logueado.
 - Headers:
 - Authorization: Bearer <token_obtenido_del_login>
--    {
--      "name": "User 1",
--      "email": "userprueba@test.com"
--    }
+```json {
+      "name": "User 1",
+      "email": "userprueba@test.com"
+    }
 - Respuesta exitosa
--    {
--      "message": "Perfil actualizado correctamente",
--      "user": {
--        "id": 2,
--        "name": "User1",
--        "email": "userprueba@test.com",
--        "role": "user"
--      }
--    }
+```  {
+      "message": "Perfil actualizado correctamente",
+      "user": {
+        "id": 2,
+        "name": "User1",
+        "email": "userprueba@test.com",
+        "role": "user"
+      }
+    }
 
 Listar todos los usuarios (solo admin)
 - Método: GET
@@ -127,17 +128,17 @@ Listar todos los usuarios (solo admin)
 - Headers:
 - Authorization: Bearer <token_admin>
 - Respuesta exitosa
--    [
--     {
--       "id": 1,
--       "name": "Admin",
--       "email": "adminprueba@test.com",
--       "role": "admin"
--     },
--     {
--       "id": 2,
--       "name": "User1",
--       "email": "usuarioprueba@test.com",
--       "role": "user"
--     }
--   ]
+```    [
+     {
+       "id": 1,
+       "name": "Admin",
+       "email": "adminprueba@test.com",
+       "role": "admin"
+     },
+     {
+       "id": 2,
+       "name": "User1",
+       "email": "usuarioprueba@test.com",
+       "role": "user"
+     }
+   ]
