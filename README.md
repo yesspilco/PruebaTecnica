@@ -1,4 +1,4 @@
-# Proyecto Gestión de Usuarios
+# Prueba Técnica - Yesenia Pilco
 
 ## Descripción
 Proyecto para la gestion de usuarios con roles de admin y user.
@@ -17,15 +17,14 @@ Tecnologias utilizadas:
 - PostgreSQL >= 16.x
 - npm >= 9.x
 
-## Instalación Backend
-```bash
-cd backend
-npm install
-cp .env.example .env  # configurar variables
-npm run dev
+## Instalacion Backend
+  cd backend
+  npm install
+  cp .env.example .env  #configurar variables
+  npm run dev 
+  
 
 ## Instalación Frontend
-```bash
 cd frontend
 npm install
 npm run dev
@@ -37,12 +36,12 @@ psql -d Prueba -f database/schema.sql
 -- Ejecutar seed.sql
 psql -d nombre_base_datos -f database/schema.sql
 
-##Credenciales de prueba
+## Credenciales de prueba
 
 Admin: adminprueba@test.com / 12345678
 Usuario normal: userprueba@test.com / 12345678
 
-##ENDPOINTS DISPONIBLES CON EJEMPLOS
+## ENDPOINTS DISPONIBLES CON EJEMPLOS
 Login
 Método: POST
 Ruta: /api/auth/login
@@ -65,7 +64,6 @@ respuesta exitosa
   }
 }
 
-
 Registro de usuario
 Método: POST
 Ruta: /api/auth/register
@@ -83,8 +81,8 @@ Respuesta exitosa
   "message": "Usuario registrado correctamente",
   "user": {
     "id": 2,
-    "name": "Juan Pérez",
-    "email": "juan@test.com",
+    "name": "Usuario de prueba",
+    "email": "userprueba@test.com",
     "role": "user"
   }
 }
