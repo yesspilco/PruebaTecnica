@@ -70,7 +70,8 @@ Registro de usuario
 - Ruta: /api/auth/register
 - Descripción: Registra un nuevo usuario.
 - Body (JSON):
-```json {
+```json
+  {
      "name": "Usuario de prueba",
       "email": "userprueba@test.com",
       "password": "12345678"
@@ -113,7 +114,8 @@ Actualizar perfil del usuario
 - Descripción: Actualiza el nombre y/o email del usuario logueado.
 - Headers:
 - Authorization: Bearer <token_obtenido_del_login>
-```json {
+```json
+    {
       "name": "User 1",
       "email": "userprueba@test.com"
     }
