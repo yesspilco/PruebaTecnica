@@ -17,7 +17,7 @@ export const pool = new Pool({
 });
 
 pool.on("connect", () => {
-  console.log("✅ Conectado a PostgreSQL!");
+  //console.log("✅ Conectado a PostgreSQL!");
 });
 
 pool.on("error", (err) => {

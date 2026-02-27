@@ -5,8 +5,6 @@ export const adminMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log("ADMIN MIDDLEWARE EJECUTADO");
-  console.log("USER EN REQUEST:", req.user);
 
   if (!req.user) {
     return res.status(401).json({
