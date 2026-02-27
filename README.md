@@ -52,6 +52,7 @@ Login
       "email": "adminprueba@test.com",
       "password": "12345678"
    }
+```
 - respuesta exitosa
 ```{
       "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -62,7 +63,7 @@ Login
         "role": "admin"
       }
     }
-
+```
 Registro de usuario
 - Método: POST
 - Ruta: /api/auth/register
@@ -72,7 +73,8 @@ Registro de usuario
      "name": "Usuario de prueba",
       "email": "userprueba@test.com",
       "password": "12345678"
-    }```
+    }
+```
 - Respuesta exitosa
 ```   {
       "message": "Usuario registrado correctamente",
@@ -82,7 +84,8 @@ Registro de usuario
         "email": "userprueba@test.com",
         "role": "user"
       }
-    }```
+    }
+```
 
 Obtener perfil del usuario logueado
 - Método: GET
@@ -98,7 +101,8 @@ Obtener perfil del usuario logueado
       "name": "Usuario de prueba",
       "email": "userprueba@test.com",
       "role": "user"
-    }```
+    }
+```
 
 Actualizar perfil del usuario
 - Método: PUT
@@ -109,7 +113,8 @@ Actualizar perfil del usuario
 ```json {
       "name": "User 1",
       "email": "userprueba@test.com"
-    }```
+    }
+```
 - Respuesta exitosa
 ```  {
       "message": "Perfil actualizado correctamente",
@@ -119,7 +124,8 @@ Actualizar perfil del usuario
         "email": "userprueba@test.com",
         "role": "user"
       }
-    }```
+    }
+```
 
 Listar todos los usuarios (solo admin)
 - Método: GET
@@ -141,4 +147,5 @@ Listar todos los usuarios (solo admin)
        "email": "usuarioprueba@test.com",
        "role": "user"
      }
-   ]```
+   ]
+```
