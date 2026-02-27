@@ -48,8 +48,8 @@ Login
 - Descripción: Inicia sesión y devuelve token JWT y datos del usuario.
 - Body (JSON):
 -    {
--      "email": "adminprueba@test.com",
--      "password": "12345678"
+      "email": "adminprueba@test.com",
+      "password": "12345678"
 -    }
 - respuesta exitosa
 -    {
@@ -62,7 +62,7 @@ Login
 -      }
 -    }
 
-- Registro de usuario
+Registro de usuario
 - Método: POST
 - Ruta: /api/auth/register
 - Descripción: Registra un nuevo usuario.
@@ -83,7 +83,7 @@ Login
 -      }
 -    }
 
-- Obtener perfil del usuario logueado
+Obtener perfil del usuario logueado
 - Método: GET
 - Ruta: /api/users/me
 - Descripción: Obtiene los datos del usuario actual.
@@ -99,7 +99,7 @@ Login
 -      "role": "user"
 -    }
 
-- Actualizar perfil del usuario
+Actualizar perfil del usuario
 - Método: PUT
 - Ruta: /api/users/me
 - Descripción: Actualiza el nombre y/o email del usuario logueado.
@@ -120,7 +120,7 @@ Login
 -      }
 -    }
 
-- Listar todos los usuarios (solo admin)
+Listar todos los usuarios (solo admin)
 - Método: GET
 - Ruta: /api/admin/users
 - Descripción: Devuelve la lista de todos los usuarios. Solo accesible para usuarios con rol admin.
